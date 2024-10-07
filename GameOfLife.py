@@ -297,7 +297,7 @@ def GetNeighbors(grid, row, col):
 
 def NextState(grid):
     N = len(grid)
-    new_grid = np.zeros((N, N))
+    new_grid = np.zeros((N, N), dtype=int)
     for i in range(N):
         for j in range(N):
             neighbors = GetNeighbors(grid, i, j)
