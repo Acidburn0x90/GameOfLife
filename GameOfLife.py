@@ -260,8 +260,29 @@ This will create a random grid of 1's and 0's with a 50% chance of each. We can 
 def RandomGrid(N):
     return np.random.choice([0, 1], (N, N), p=[0.5, 0.5])
 
+"""
+Lets also create a function that will convert our 1s and 0s into a more visual representation
+"""
+
+def VisualGrid(grid):
+    N = len(grid)
+    visual_grid = ""
+    for i in range(N):
+        for j in range(N):
+            if grid[i][j] == 1:
+                visual_grid += "\u2588"
+            else:
+                visual_grid += "\u2591"
+        visual_grid += "\n"
+    return visual_grid
+
+
 
 """
+The "\u2588" and "\u2591" are unicode characters that represent a filled block and a light shade block, respectively.
+This function just loops through every cell and if it is a 1, it will make it a filled block, if it is a zero, it will
+make it a light shade block. It then adds a newline character at the end of each row to create a visual grid with all the rows ontop of eachother and not next to eachother.
+
 Now lets put this all together! We will use a cool python feature called "if __name__ == '__main__':" to run our code.
 This is used to check if the script is being run directly or being imported. If the script is being run directly, the
 code inside the if statement will be executed. If the script is being imported, the code inside the if statement will
@@ -279,7 +300,7 @@ import numpy as np
 import time # We will use this to slow down the output so that we can see the grid change
 import os # We will use this to clear the console between each generation
 
-N = 10
+N = 30
 
 
 # Let's declare our functions which we created above.
@@ -297,7 +318,7 @@ def GetNeighbors(grid, row, col):
 
 def NextState(grid):
     N = len(grid)
-    new_grid = np.zeros((N, N), dtype=int)
+    new_grid = np.zeros((len(grid), len(grid[0])), dtype=int)
     for i in range(N):
         for j in range(N):
             neighbors = GetNeighbors(grid, i, j)
@@ -324,18 +345,18 @@ if __name__ == '__main__':
     grid = RandomGrid(N)
 
     # Number of generations we want to do, in this case 10
-    for i in range(10):
+    for i in range(10000):
         # Clear the console
         os.system('cls' if os.name == 'nt' else 'clear') # Don't worry about this, it just clears the console
         
-        # Print the grid
-        print(grid)
+        # Print the grid in our visual representation
+        print(VisualGrid(grid))
 
         # Update the grid
         grid = NextState(grid)
 
         # Pause the output for 1 second
-        time.sleep(1)
+        time.sleep(0.1)
 
 """
 Congratulations! You have now created a simple implementation of John Conway's Game of Life. You have learned how to
