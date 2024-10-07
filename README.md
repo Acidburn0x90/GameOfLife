@@ -1,5 +1,6 @@
 # John Conway's Game of Life
 ***A Python Implementation***
+
 *Created by the RCHS Cyber Club Team*
 
 
